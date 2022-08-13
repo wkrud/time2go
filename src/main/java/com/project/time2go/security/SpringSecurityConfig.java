@@ -20,26 +20,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+		        .csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/t2g").hasRole("USER")
+				.antMatchers("/t2g").permitAll()
 			.and()
 				.formLogin()
-				.loginPage("/login")
+				.loginPage("/login/login")
 				.defaultSuccessUrl("/", true)
 				.usernameParameter("username")
 				.passwordParameter("password")
@@ -50,18 +51,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/login")
 				.invalidateHttpSession(true)
 			.and()
-				.csrf().disable();
-				
+				;
+
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(securityService).passwordEncoder(bCryptPasswordEncoder());
 	}
-	
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring();
 	}
-		
+
 }

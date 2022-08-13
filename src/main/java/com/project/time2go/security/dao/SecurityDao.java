@@ -6,6 +6,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Mapper
 public interface SecurityDao {
 
-	UserDetails loadUserByUsername(String username);
-	
+    UserDetails loadUserByUsername(String username);
+
 }

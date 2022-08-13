@@ -9,6 +9,13 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="집에가자" name="title"/>
 </jsp:include>
-    <h1>Time2Home</h1>
+
+    <form action="">
+        <label for="username">아이디 : </label>
+        <input type="text" id="username" name="username" />
+        <label for="password">비밀번호 : </label>
+        <input type="text" id="password" name="passowrd" />
+        <input type="button" value="로그인" />
+    </form>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
